@@ -9,8 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Button;
 import otp.utils.ipscope.model.IPAddress;
-import java.sql.Timestamp;
-import java.util.Date;
 
 public class Controller {
     @FXML
@@ -46,9 +44,6 @@ public class Controller {
     @FXML
     private void handleStart()
     {
-        java.util.Date date= new java.util.Date();
-        Timestamp ts = new Timestamp(date.getTime());
-
         lOutput.setText("Работаю...");
         IPAddress ipLeft = new IPAddress();
         IPAddress ipRight = new IPAddress();
@@ -65,14 +60,7 @@ public class Controller {
             return;
         }
         String stOutScope = ipLeft.toString() + "\r\n";;
-        //old version
-        /*
-        while(ipLeft.compare(ipRight) != 0)
-        {
-            ipLeft.increment();
-            stOutScope += ipLeft.toString() + "\r\n";
 
-        }*/
         int n = ipRight.getIntIP() - ipLeft.getIntIP();
         for(int i = 0; i < n; i++)
         {

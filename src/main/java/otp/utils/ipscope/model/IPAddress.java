@@ -52,19 +52,6 @@ public class IPAddress {
      */
     public int compare(IPAddress addr)
     {
-        //old version
-        /*for(int i = 0; i < 4; i++)
-        {
-            if (this.iIpEntrys[i] < addr.getIP()[i])
-            {
-                return 1;
-            }
-            else if (this.iIpEntrys[i] > addr.getIP()[i])
-            {
-                return -1;
-            }
-        }*/
-
         int comparedIP = addr.getIntIP();
         if (iIP < comparedIP)
         {
@@ -78,20 +65,6 @@ public class IPAddress {
 
     public void increment()
     {
-        //boolean next_dis = true;
-        //old version
-        /*for(int i = 3; i >= 0; i--)
-        {
-            if (iIpEntrys[i] == 255)
-            {
-                iIpEntrys[i] = 0;
-            }
-            else
-            {
-                iIpEntrys[i]++;
-                return;
-            }
-        }*/
         toInt();
         iIP++;
         toIP();

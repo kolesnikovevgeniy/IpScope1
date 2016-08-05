@@ -12,7 +12,7 @@
       <TextArea fx:id="tfOutputScope" layoutX="21.0" layoutY="109.0" prefHeight="200.0" prefWidth="281.0" />
       <TextField fx:id="tfLeftIP" layoutX="41.0" layoutY="72.0" prefHeight="25.0" prefWidth="106.0" />
       <TextField fx:id="tfRightIP" layoutX="194.0" layoutY="72.0" prefHeight="25.0" prefWidth="106.0" />
-      <Label fx:id="lOutput" layoutX="18.0" layoutY="325.0" text="Label" />
+      <Label fx:id="lOutput" layoutX="18.0" layoutY="325.0" />
       <Label layoutX="21.0" layoutY="71.0" text="C">
          <font>
             <Font size="18.0" />
