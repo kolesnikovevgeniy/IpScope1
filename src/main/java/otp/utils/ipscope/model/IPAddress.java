@@ -6,15 +6,18 @@ package otp.utils.ipscope.model;
 import java.util.regex.*;
 
 public class IPAddress {
-    public int first;
-    public int second;
-    public int third;
-    public int fourth;
     private int[] iIpEntrys = new int[4];
+    private int iIP;
 
     public IPAddress()
     {
 
+    }
+
+    public int getIntIP()
+    {
+        toInt();
+        return iIP;
     }
 
     public int[] getIP()
@@ -24,7 +27,6 @@ public class IPAddress {
 
     public boolean set(String stAddr)
     {
-        System.out.println("IP set");
         // проверяем адрес
         String pattern = "(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
 
@@ -38,14 +40,9 @@ public class IPAddress {
             iIpEntrys[1] = Integer.parseInt(ip_entrys[1]);
             iIpEntrys[2] = Integer.parseInt(ip_entrys[2]);
             iIpEntrys[3] = Integer.parseInt(ip_entrys[3]);
-
-            this.first = Integer.parseInt(ip_entrys[0]);
-            this.second = Integer.parseInt(ip_entrys[1]);
-            this.third = Integer.parseInt(ip_entrys[2]);
-            this.fourth = Integer.parseInt(ip_entrys[3]);
+            toInt();
             return true;
         }
-
         return false;
     }
     /**
@@ -55,7 +52,8 @@ public class IPAddress {
      */
     public int compare(IPAddress addr)
     {
-        for(int i = 0; i < 4; i++)
+        //old version
+        /*for(int i = 0; i < 4; i++)
         {
             if (this.iIpEntrys[i] < addr.getIP()[i])
             {
@@ -65,6 +63,15 @@ public class IPAddress {
             {
                 return -1;
             }
+        }*/
+
+        int comparedIP = addr.getIntIP();
+        if (iIP < comparedIP)
+        {
+            return 1;
+        }else if (iIP > comparedIP)
+        {
+            return -1;
         }
         return 0;
     }
@@ -72,7 +79,8 @@ public class IPAddress {
     public void increment()
     {
         //boolean next_dis = true;
-        for(int i = 3; i >= 0; i--)
+        //old version
+        /*for(int i = 3; i >= 0; i--)
         {
             if (iIpEntrys[i] == 255)
             {
@@ -83,7 +91,23 @@ public class IPAddress {
                 iIpEntrys[i]++;
                 return;
             }
-        }
+        }*/
+        toInt();
+        iIP++;
+        toIP();
+    }
+
+    private void toInt()
+    {
+        iIP = iIpEntrys[0]*256*256*256+iIpEntrys[1]*256*256+iIpEntrys[2]*256+iIpEntrys[3];
+    }
+
+    private void toIP()
+    {
+        iIpEntrys[0]=(int)(iIP/256/256/256);
+        iIpEntrys[1]=(int)((iIP-iIpEntrys[0]*256*256*256)/256/256);
+        iIpEntrys[2]=(int)((iIP-iIpEntrys[0]*256*256*256-iIpEntrys[1]*256*256)/256);
+        iIpEntrys[3]=iIP-iIpEntrys[0]*256*256*256-iIpEntrys[1]*256*256-iIpEntrys[2]*256;
     }
 
     public String toString()
