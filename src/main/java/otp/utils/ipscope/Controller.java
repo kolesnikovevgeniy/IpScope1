@@ -6,8 +6,9 @@ package otp.utils.ipscope;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.Button;
-import otp.utils.ipscope.AppMain;
+import otp.utils.ipscope.model.IPAddress;
 
 public class Controller {
     @FXML
@@ -17,42 +18,87 @@ public class Controller {
     private TextField tfRightIP;
 
     @FXML
-    private TextField tfOutputScope;
+    private TextArea tfOutputScope;
 
     @FXML
-    private TextField tfOutput;
+    private Label lOutput;
 
+    @FXML
+    private Button btnStart;
+
+    @FXML
+    private Button btnExit;
 
     // Ссылка на главное приложение.
     private AppMain mainApp;
 
     /**
      * Конструктор.
-     * Конструктор вызывается раньше метода initialize().
      */
     public Controller() {
     }
 
     /**
-     * Инициализация класса-контроллера. Этот метод вызывается автоматически
-     * после того, как fxml-файл будет загружен.
+     * Обработчик нажатия на кнопку запуска.
      */
     @FXML
-    private void initialize() {
-        // Инициализация таблицы адресатов с двумя столбцами.
-        //firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-        //lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+    private void handleStart()
+    {
+        lOutput.setText("Working...");
+        IPAddress ipLeft = new IPAddress();
+        IPAddress ipRight = new IPAddress();
+
+        if(!ipLeft.set(tfLeftIP.getText()) || !ipRight.set(tfRightIP.getText()))
+        {
+            lOutput.setText("Ошибка: неверный формат ip.");
+            return;
+        }
+
+        if (ipLeft.compare(ipRight) == -1)
+        {
+            lOutput.setText("Ошибка: неправильно задан диапазон.");
+            return;
+        }
+        String stOutScope = ipLeft.toString();
+        while(ipLeft.compare(ipRight) != 0)
+        {
+            ipLeft.increment();
+            stOutScope += ipLeft.toString() + "\r\n";
+
+        }
+        stOutScope += ipRight.toString();
+        tfOutputScope.setText(stOutScope);
+        lOutput.setText("Готово");
     }
 
     /**
-     * Вызывается главным приложением, которое даёт на себя ссылку.
+     * Обработчик нажатия на кнопку выхода.
+     */
+    @FXML
+    private void handleExit()
+    {
+        try
+        {
+            // выход
+            System.exit(0);
+        }catch (Exception e)
+        {
+            System.out.print(e.getMessage());
+        }
+    }
+    /**
+     * Инициализация класса-контроллера.
+     */
+    @FXML
+    private void initialize() {
+
+    }
+
+    /**
      *
      * @param mainApp
      */
     public void setMainApp(AppMain mainApp) {
         this.mainApp = mainApp;
-
-        // Добавление в таблицу данных из наблюдаемого списка
-        //personTable.setItems(mainApp.getPersonData());
     }
 }

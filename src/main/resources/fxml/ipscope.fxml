@@ -4,14 +4,13 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="otp.utils.ipscope.Controller">
    <children>
-      <Button layoutX="488.0" layoutY="35.0" mnemonicParsing="false" text="Button" />
-      <Button layoutX="514.0" layoutY="350.0" mnemonicParsing="false" text="Button" />
-      <Label layoutX="21.0" layoutY="342.0" prefHeight="17.0" prefWidth="475.0" text="Label" />
-      <TextArea layoutX="21.0" layoutY="109.0" prefHeight="200.0" prefWidth="511.0" />
-      <TextField layoutX="21.0" layoutY="67.0" />
-      <TextField layoutX="214.0" layoutY="67.0" />
+      <Button fx:id="btnStart" layoutX="488.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleStart" text="START" />
+      <Button fx:id="btnExit" layoutX="514.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleExit" text="EXIT" />
+      <TextArea fx:id="tfOutputScope" layoutX="21.0" layoutY="109.0" prefHeight="200.0" prefWidth="511.0" />
+      <TextField fx:id="tfLeftIP" layoutX="21.0" layoutY="67.0" />
+      <TextField fx:id="tfRightIP" layoutX="214.0" layoutY="67.0" />
+      <Label fx:id="lOutput" layoutX="27.0" layoutY="342.0" text="Label" />
    </children>
 </Pane>
