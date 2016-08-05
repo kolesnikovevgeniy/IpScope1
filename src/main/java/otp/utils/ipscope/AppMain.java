@@ -9,10 +9,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class IpScope extends Application {
+public class AppMain extends Application {
 
     public static void main(String[] args) throws Exception {
+        System.getProperty("java.classpath");
         launch(args);
+        //System.out.print("Test");
     }
 
     @Override
@@ -20,6 +22,10 @@ public class IpScope extends Application {
         String fxmlFile = "/fxml/ipscope.fxml";
         FXMLLoader loader = new FXMLLoader();
         Parent root = (Parent) loader.load(getClass().getResourceAsStream(fxmlFile));
+
+        Controller controller = loader.getController();
+        controller.setMainApp(this);
+
         stage.setTitle("JavaFX and Maven");
         stage.setScene(new Scene(root));
         stage.show();
