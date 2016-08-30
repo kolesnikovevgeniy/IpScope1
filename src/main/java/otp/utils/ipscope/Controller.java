@@ -54,22 +54,27 @@ public class Controller {
             return;
         }
 
-        if (ipLeft.compare(ipRight) == -1)
+        // определяем диапазон
+        long n = ipRight.getIntIP() - ipLeft.getIntIP();
+        if (n < 0) // диапазон задан неверно
         {
             lOutput.setText("Ошибка: неправильно задан диапазон.");
-            return;
         }
-        String stOutScope = ipLeft.toString() + "\r\n";;
-
-        int n = ipRight.getIntIP() - ipLeft.getIntIP();
-        for(int i = 0; i < n; i++)
+        else if (n == 0)//диапазон нулевой и выводить нечего
         {
-            ipLeft.increment();
-            stOutScope += ipLeft.toString() + "\r\n";
+            lOutput.setText("Ошибка: неправильно задан диапазон.");
         }
-        //stOutScope += ipRight.toString();
-        tfOutputScope.setText(stOutScope);
-        lOutput.setText("Готово");
+        else
+        {
+            // выводим диапазон на форму
+            String stOutScope = ipLeft.toString() + "\r\n";;
+            for (long i = 0; i < n; i++) {
+                ipLeft.increment();
+                stOutScope += ipLeft.toString() + "\r\n";
+            }
+            tfOutputScope.setText(stOutScope);
+            lOutput.setText("Готово");
+        }
     }
 
     /**
