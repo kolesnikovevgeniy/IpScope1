@@ -7,7 +7,7 @@ import java.util.regex.*;
 
 public class IPAddress {
 
-    private long iIP;
+    private long iIP = 0;
 
     public IPAddress()
     {
@@ -15,7 +15,7 @@ public class IPAddress {
     }
 
     //возвращаем значение адреса
-    public long getIntIP()
+    public long getLongIP()
     {
         return iIP;
     }

@@ -55,7 +55,7 @@ public class Controller {
         }
 
         // определяем диапазон
-        long n = ipRight.getIntIP() - ipLeft.getIntIP();
+        long n = ipRight.getLongIP() - ipLeft.getLongIP();
         if (n < 0) // диапазон задан неверно
         {
             lOutput.setText("Ошибка: неправильно задан диапазон.");
